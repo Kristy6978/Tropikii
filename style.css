@@ -1,0 +1,29 @@
+/* css/animals.css */
+.animals-section {
+  background-color: #004d00;
+  padding: 40px 20px;
+  color: #fff;
+  text-align: center;
+}
+
+.animal-card {
+  background-color: #fff;
+  color: #000;
+  border-radius: 10px;
+  max-width: 300px;
+  margin: 20px auto;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  overflow: hidden;
+}
+
+.animal-card img {
+  width: 100%;
+  height: auto;
+}
+
+.animal-card h3 {
+  margin: 0;
+  padding: 10px;
+  background-color: #2ecc71;
+  color: #fff;
+}
