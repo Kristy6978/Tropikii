@@ -1,0 +1,143 @@
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <title>Тропики: Викторина</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: url('https://i.imgur.com/3qZg4u6.jpg') no-repeat center center fixed;
+      background-size: cover;
+      color: #fff;
+      text-align: center;
+    }
+
+    .container {
+      background-color: rgba(0, 100, 0, 0.7); /* Прозрачный зеленый фон */
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 600px;
+      margin: 50px auto;
+      box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+    }
+
+    h1 {
+      font-size: 2.5em;
+      margin-bottom: 20px;
+    }
+
+    .question {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .answers button {
+      display: block;
+      width: 80%;
+      margin: 10px auto;
+      padding: 12px;
+      font-size: 1em;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .answers button:hover {
+      background-color: #2ecc71;
+    }
+
+    .result {
+      font-size: 1.5em;
+      margin-top: 30px;
+      display: none;
+    }
+
+    .correct {
+      color: #2ecc71;
+    }
+
+    .wrong {
+      color: #e74c3c;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🌴 Тропики: Викторина</h1>
+    <div id="quiz">
+      <div class="question" id="question">Вопрос</div>
+      <div class="answers" id="answers"></div>
+      <div class="result" id="result"></div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "Какое животное живёт в тропических лесах?",
+        answers: ["Пингвин", "Ягуар", "Белый медведь"],
+        correct: 1
+      },
+      {
+        text: "Какое дерево называют 'деревом жизни' в тропиках?",
+        answers: ["Сосна", "Баобаб", "Дуб"],
+        correct: 1
+      },
+      {
+        text: "Какой фрукт родом из тропиков?",
+        answers: ["Яблоко", "Киви", "Манго"],
+        correct: 2
+      }
+    ];
+
+    let currentQuestion = 0;
+    let score = 0;
+
+    const questionEl = document.getElementById("question");
+    const answersEl = document.getElementById("answers");
+    const resultEl = document.getElementById("result");
+
+    function showQuestion() {
+      const q = questions[currentQuestion];
+      questionEl.textContent = q.text;
+      answersEl.innerHTML = "";
+      q.answers.forEach((answer, index) => {
+        const button = document.createElement("button");
+        button.textContent = answer;
+        button.onclick = () => checkAnswer(index);
+        answersEl.appendChild(button);
+      });
+    }
+
+    function checkAnswer(index) {
+      const q = questions[currentQuestion];
+      if (index === q.correct) {
+        score++;
+        resultEl.textContent = "Правильно! 🎉";
+        resultEl.className = "result correct";
+      } else {
+        resultEl.textContent = "Неправильно 😕";
+        resultEl.className = "result wrong";
+      }
+      resultEl.style.display = "block";
+      setTimeout(() => {
+        currentQuestion++;
+        if (currentQuestion < questions.length) {
+          resultEl.style.display = "none";
+          showQuestion();
+        } else {
+          showFinalResult();
+        }
+      }, 1000);
+    }
+
+    function showFinalResult() {
+      questionEl.style.display = "none";
+      answersEl.innerHTML = `<h2>Вы набрали ${score} из ${questions.length} баллов!</h2>`;
+      resultEl.style.display = "none";
+    }
+    showQuestion();
+  </script>
+</body>
+</html>
