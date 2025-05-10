@@ -6,14 +6,14 @@
     body {
       margin: 0;
       font-family: 'Arial', sans-serif;
-      background: url('https://i.imgur.com/3qZg4u6.jpg') no-repeat center center fixed;
+      background: url('https://i.imgur.com/3qZg4u6.jpg ') no-repeat center center fixed;
       background-size: cover;
       color: #fff;
       text-align: center;
     }
 
     .container {
-      background-color: rgba(0, 100, 0, 0.7); /* Прозрачный зеленый фон */
+      background-color: rgba(0, 100, 0, 0.7);
       padding: 30px;
       border-radius: 15px;
       max-width: 600px;
@@ -24,6 +24,28 @@
     h1 {
       font-size: 2.5em;
       margin-bottom: 20px;
+    }
+
+    .fact {
+      font-size: 1.1em;
+      margin: 15px 0;
+    }
+
+    .start-button {
+      display: inline-block;
+      padding: 12px 25px;
+      font-size: 1em;
+      margin-top: 20px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      background-color: #2ecc71;
+      color: white;
+      transition: 0.3s;
+    }
+
+    .start-button:hover {
+      background-color: #27ae60;
     }
 
     .question {
@@ -63,13 +85,23 @@
   </style>
 </head>
 <body>
-  <div class="container">
+
+  <!-- Экран с фактами -->
+  <div class="container" id="facts-screen">
+    <h1>🌴 Интересные факты о тропиках</h1>
+    <p class="fact">Тропики — это зона вокруг экватора с жарким и влажным климатом.</p>
+    <p class="fact">Более половины всех видов животных и растений живут именно в тропических лесах.</p>
+    <p class="fact">Баобаб может хранить до 120 000 литров воды внутри ствола!</p>
+    <p class="fact">Манго — один из самых популярных фруктов в мире, родом из Индии.</p>
+    <button class="start-button" onclick="startQuiz()">Начать викторину</button>
+  </div>
+
+  <!-- Основной контент викторины -->
+  <div class="container" id="quiz" style="display:none;">
     <h1>🌴 Тропики: Викторина</h1>
-    <div id="quiz">
-      <div class="question" id="question">Вопрос</div>
-      <div class="answers" id="answers"></div>
-      <div class="result" id="result"></div>
-    </div>
+    <div class="question" id="question">Вопрос</div>
+    <div class="answers" id="answers"></div>
+    <div class="result" id="result"></div>
   </div>
 
   <script>
@@ -137,7 +169,12 @@
       answersEl.innerHTML = `<h2>Вы набрали ${score} из ${questions.length} баллов!</h2>`;
       resultEl.style.display = "none";
     }
-    showQuestion();
+
+    function startQuiz() {
+      document.getElementById("facts-screen").style.display = "none";
+      document.getElementById("quiz").style.display = "block";
+      showQuestion();
+    }
   </script>
 </body>
 </html>
